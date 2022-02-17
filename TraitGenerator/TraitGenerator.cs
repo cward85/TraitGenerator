@@ -29,11 +29,11 @@ namespace TraitGenerator
 
         private bool PopulateLists()
         {
-            List<string> PrototypeList = ReadCommaDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Prototype.ToString()]);
-            List<string> AgeList = ReadCommaDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Age.ToString()]);
-            List<string> WantList = ReadCommaDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Want.ToString()]);
-            List<string> FlawList = ReadCommaDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Flaw.ToString()]);
-            List<string> FearList = ReadCommaDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Fear.ToString()]);
+            List<string> PrototypeList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Prototype.ToString()], '|');
+            List<string> AgeList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Age.ToString()], '|');
+            List<string> WantList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Want.ToString()], '|');
+            List<string> FlawList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Flaw.ToString()], '|');
+            List<string> FearList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Fear.ToString()], '|');
 
             MasterNamesList = new List<KeyValuePair<SentenceStructure, List<string>>>
             {
@@ -81,7 +81,6 @@ namespace TraitGenerator
 
         private List<KeyValuePair<SentenceStructure, string>> DetermineOrder()
         {
-
             int randomNumber;
 
             List<KeyValuePair<SentenceStructure, string>> traitSentence = new List<KeyValuePair<SentenceStructure, string>>();
@@ -95,8 +94,9 @@ namespace TraitGenerator
             return traitSentence;
         }
 
-        private void PrintName(List<KeyValuePair<SentenceStructure, string>> traitList)
+        private void PrintName(List<KeyValuePair<SentenceStructure, string>> traitList, int index)
         {
+            txtNames.AppendText("Run " + (index + 1) + Environment.NewLine);
             foreach (KeyValuePair<SentenceStructure, string> sentence in traitList)
             {
                 txtNames.AppendText(sentence.Key.ToString() + ": " + sentence.Value + Environment.NewLine);
@@ -105,7 +105,7 @@ namespace TraitGenerator
             txtNames.AppendText(Environment.NewLine);
         }
 
-        private List<string> ReadCommaDelineatedFile(string p_strPath)
+        private List<string> ReadDelineatedFile(string p_strPath, char p_chrDelimiter)
         {
             if (File.Exists(p_strPath))
             {
@@ -113,7 +113,7 @@ namespace TraitGenerator
 
                 if (objFileContents.Length != 0)
                 {
-                    return objFileContents.Split(',').Select(x => x.Trim()).ToList<string>();
+                    return objFileContents.Split(p_chrDelimiter).Select(x => x.Trim()).ToList<string>().Where(y => y.Length != 0).ToList<string>();
                 }
             }
 
@@ -133,7 +133,7 @@ namespace TraitGenerator
                 for (int i = 0; i < int.Parse(txtNumberOfNames.Text); i++)
                 {
                     List<KeyValuePair<SentenceStructure, string>> traitList = DetermineOrder();
-                    PrintName(traitList);
+                    PrintName(traitList, i);
                 }
             }
         }
@@ -158,6 +158,15 @@ namespace TraitGenerator
             form.ShowDialog();
         }
 
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            About form = new About();
+
+            form.ShowDialog();
+        }
+
         #endregion
+
+
     }  
 }

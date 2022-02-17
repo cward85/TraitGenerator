@@ -49,10 +49,10 @@ namespace TraitGenerator
         private void PopulateTextBoxes()
         {
             txtPrototype.Text = ConfigurationManager.AppSettings[SentenceStructure.Prototype.ToString()].Split('\\').Last();
-            txtAge.Text = ConfigurationManager.AppSettings[SentenceStructure.Age.ToString()].Split('\\').Last();
-            txtFlaw.Text = ConfigurationManager.AppSettings[SentenceStructure.Want.ToString()].Split('\\').Last();
-            txtWant.Text = ConfigurationManager.AppSettings[SentenceStructure.Flaw.ToString()].Split('\\').Last();
-            txtFlaw.Text = ConfigurationManager.AppSettings[SentenceStructure.Fear.ToString()].Split('\\').Last();
+            txtAge.Text = ConfigurationManager.AppSettings[SentenceStructure.Age.ToString()].Split('\\').Last();            
+            txtWant.Text = ConfigurationManager.AppSettings[SentenceStructure.Want.ToString()].Split('\\').Last();
+            txtFlaw.Text = ConfigurationManager.AppSettings[SentenceStructure.Flaw.ToString()].Split('\\').Last();
+            txtFear.Text = ConfigurationManager.AppSettings[SentenceStructure.Fear.ToString()].Split('\\').Last();
             
         }     
       

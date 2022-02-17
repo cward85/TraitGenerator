@@ -34,6 +34,7 @@
             this.txtNumberOfNames = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.btnAbout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtNames
@@ -46,7 +47,7 @@
             this.txtNames.Name = "txtNames";
             this.txtNames.ReadOnly = true;
             this.txtNames.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNames.Size = new System.Drawing.Size(416, 678);
+            this.txtNames.Size = new System.Drawing.Size(1393, 678);
             this.txtNames.TabIndex = 0;
             // 
             // btnGenerate
@@ -77,28 +78,42 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 702);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "# of Names";
+            this.label1.Text = "# of Entries";
             // 
             // btnSettings
             // 
             this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
-            this.btnSettings.Location = new System.Drawing.Point(400, 694);
+            this.btnSettings.Location = new System.Drawing.Point(1377, 694);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(28, 28);
             this.btnSettings.TabIndex = 4;
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
+            // btnAbout
+            // 
+            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAbout.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.Image")));
+            this.btnAbout.Location = new System.Drawing.Point(1343, 694);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(28, 28);
+            this.btnAbout.TabIndex = 5;
+            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
             // TraitGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(441, 728);
+            this.ClientSize = new System.Drawing.Size(1418, 728);
+            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNumberOfNames);
@@ -120,6 +135,7 @@
         private System.Windows.Forms.TextBox txtNumberOfNames;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnAbout;
     }
 }
 
