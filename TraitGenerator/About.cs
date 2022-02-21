@@ -15,6 +15,8 @@ namespace TraitGenerator
         public About()
         {
             InitializeComponent();
+
+            lblVersion.Text = Application.ProductVersion;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

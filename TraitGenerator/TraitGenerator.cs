@@ -22,6 +22,7 @@ namespace TraitGenerator
         {
             InitializeComponent();
             this.ActiveControl = txtNumberOfNames;
+            this.Text = "Trait Generator v" + Application.ProductVersion;
         }
 
         #region Functions
