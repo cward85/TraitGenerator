@@ -14,9 +14,8 @@ namespace TraitGenerator
 {
    
     public partial class TraitGenerator : Form
-    {
-        List<KeyValuePair<SentenceStructure, List<string>>> MasterNamesList;
-
+    {       
+        List<KeyValuePair<string, List<string>>> MasterAttributeNamesList;
         Random RandomNumberGenerator = new Random();
       
         public TraitGenerator()
@@ -28,30 +27,31 @@ namespace TraitGenerator
         #region Functions
 
         private bool PopulateLists()
-        {
-            List<string> PrototypeList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Prototype.ToString()], '|');
-            List<string> AgeList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Age.ToString()], '|');
-            List<string> WantList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Want.ToString()], '|');
-            List<string> FlawList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Flaw.ToString()], '|');
-            List<string> FearList = ReadDelineatedFile(ConfigurationManager.AppSettings[SentenceStructure.Fear.ToString()], '|');
+        {           
+            MasterAttributeNamesList = new List<KeyValuePair<string, List<string>>>();
 
-            MasterNamesList = new List<KeyValuePair<SentenceStructure, List<string>>>
-            {
-                new KeyValuePair<SentenceStructure, List<string>> (SentenceStructure.Prototype, PrototypeList),
-                new KeyValuePair<SentenceStructure, List<string>> (SentenceStructure.Age, AgeList),
-                new KeyValuePair<SentenceStructure, List<string>> (SentenceStructure.Want, WantList),
-                new KeyValuePair<SentenceStructure, List<string>> (SentenceStructure.Flaw, FlawList),
-                new KeyValuePair<SentenceStructure, List<string>> (SentenceStructure.Fear, FearList)
-            };
+            GenerateLists();
 
-            return ValidateLists(MasterNamesList);
+            return ValidateLists(MasterAttributeNamesList);
         }
 
-        private bool ValidateLists(List<KeyValuePair<SentenceStructure, List<string>>> p_lstSentenceParts)
+        private void GenerateLists()
+        {         
+            List<string> lstAttibutesList = ReadDelineatedFile(Constants.ATTRIBUTE_NAME_PATH, '|');
+
+            foreach (string attributeFilePath in lstAttibutesList)
+            {
+                KeyValuePair<string, List<string>> lstAttribute = new KeyValuePair<string, List<string>>(attributeFilePath.Split(';')[0], ReadDelineatedFile(attributeFilePath.Split(';')[2], '|'));
+
+                MasterAttributeNamesList.Add(lstAttribute);
+            }
+        }
+
+        private bool ValidateLists(List<KeyValuePair<string, List<string>>> p_lstSentenceParts)
         {
             string strErrorMessage = string.Empty;
 
-            foreach (KeyValuePair<SentenceStructure, List<string>> sentencePart in p_lstSentenceParts)
+            foreach (KeyValuePair<string, List<string>> sentencePart in p_lstSentenceParts)
             {
                 if (sentencePart.Value.Count == 0)
                 {
@@ -79,25 +79,25 @@ namespace TraitGenerator
             return "a ";
         }
 
-        private List<KeyValuePair<SentenceStructure, string>> DetermineOrder()
+        private List<KeyValuePair<string, string>> DetermineOrder()
         {
             int randomNumber;
 
-            List<KeyValuePair<SentenceStructure, string>> traitSentence = new List<KeyValuePair<SentenceStructure, string>>();
+            List<KeyValuePair<string, string>> traitSentence = new List<KeyValuePair<string, string>>();
 
-            foreach (KeyValuePair<SentenceStructure, List<string>> sentence in MasterNamesList)
+            foreach (KeyValuePair<string, List<string>> sentence in MasterAttributeNamesList)
             {
                 randomNumber = RandomNumberGenerator.Next(0, sentence.Value.Count);
-                traitSentence.Add(new KeyValuePair<SentenceStructure, string>(sentence.Key, sentence.Value[randomNumber]));
+                traitSentence.Add(new KeyValuePair<string, string>(sentence.Key, sentence.Value[randomNumber]));
             }
 
             return traitSentence;
         }
 
-        private void PrintName(List<KeyValuePair<SentenceStructure, string>> traitList, int index)
+        private void PrintName(List<KeyValuePair<string, string>> traitList, int index)
         {
             txtNames.AppendText("Run " + (index + 1) + Environment.NewLine);
-            foreach (KeyValuePair<SentenceStructure, string> sentence in traitList)
+            foreach (KeyValuePair<string, string> sentence in traitList)
             {
                 txtNames.AppendText(sentence.Key.ToString() + ": " + sentence.Value + Environment.NewLine);
             }
@@ -132,7 +132,7 @@ namespace TraitGenerator
 
                 for (int i = 0; i < int.Parse(txtNumberOfNames.Text); i++)
                 {
-                    List<KeyValuePair<SentenceStructure, string>> traitList = DetermineOrder();
+                    List<KeyValuePair<string, string>> traitList = DetermineOrder();
                     PrintName(traitList, i);
                 }
             }

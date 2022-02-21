@@ -42,10 +42,10 @@
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.MaximumSize = new System.Drawing.Size(250, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(222, 39);
+            this.label1.Size = new System.Drawing.Size(218, 39);
             this.label1.TabIndex = 1;
-            this.label1.Text = "This program takes the 5 specified files in the settings, grabs one value from ea" +
-    "ch file, and generates a number of entries.";
+            this.label1.Text = "This program takes the specified files in the settings, grabs one value from each" +
+    " file, and generates a number of entries.";
             // 
             // label2
             // 
@@ -69,10 +69,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 63);
+            this.label4.MaximumSize = new System.Drawing.Size(75, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.Size = new System.Drawing.Size(68, 26);
             this.label4.TabIndex = 4;
-            this.label4.Text = "File Setup Info:";
+            this.label4.Text = "Attribute File Setup Info:";
             // 
             // label5
             // 
